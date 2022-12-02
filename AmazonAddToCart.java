@@ -1,5 +1,6 @@
 package seleniumIntrodction;
 
+import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,9 +12,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.testng.Assert;
 
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class ActionMouse {
+public class AmazonAddToCart {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
@@ -22,6 +24,7 @@ public class ActionMouse {
 		WebDriver driver = new ChromeDriver();
 
 		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.get("https://www.amazon.com/");
 
 		driver.findElement(By.cssSelector("input#twotabsearchtextbox")).sendKeys("hats for men");
@@ -39,16 +42,11 @@ public class ActionMouse {
 		// go to cart
 		driver.findElement(By.id("nav-cart-text-container")).click();
 
-		// assert quantity is 2
-		String[] splitQty = driver.findElement(By.xpath("//span[@class='a-button-text a-declarative']")).getText().split(":");
 
-		// int totalQuantyOfHats = Integer.parseInt(splitQty[1]);
-		System.out.println(splitQty[1]);
-		Assert.assertEquals(splitQty[1], "2");
-
-		// get the single item price
-		Thread.sleep(3000);
-		String singleHatPriceWith$ = driver.findElement(By.xpath("//span[@class='a-size-medium a-color-base sc-price sc-white-space-nowrap sc-product-price a-text-bold']")).getText();
+		Thread.sleep(2000);
+		String singleHatPriceWith$ = driver.findElement(By.xpath(
+				"//span[@class='a-size-medium a-color-base sc-price sc-white-space-nowrap sc-product-price a-text-bold']"))
+				.getText();
 
 		Pattern p = Pattern.compile("[^0-9]*([0-9]*,?([0-9]+(\\.[0-9]*))?)");
 		Matcher m = p.matcher(singleHatPriceWith$);
@@ -60,8 +58,8 @@ public class ActionMouse {
 
 		// assert total price for 2 hats
 
-		String totalPricericeWith$ = driver.findElement(By.xpath("//span[@id='sc-subtotal-amount-activecart']//span[@class='a-size-medium a-color-base sc-price sc-white-space-nowrap']")).getText();
-		Matcher m1 = p.matcher(totalPricericeWith$);
+		String totalPriceWith$ = driver.findElement(By.id("sc-subtotal-amount-activecart")).getText(); 
+		Matcher m1 = p.matcher(totalPriceWith$);
 		m1.matches();
 		String twoHatsPrice_num = m1.group(1).replace(",", "");
 
@@ -71,17 +69,33 @@ public class ActionMouse {
 
 		// change cart quantity to 1 item
 
+		
 		driver.findElement(By.xpath("//span[@class='a-button-text a-declarative']")).click();
+		Thread.sleep(1000);
 		driver.findElement(By.id("quantity_1")).click();
 
-		driver.navigate().refresh();
+ //assert for 1 quantity
+		String[] productQntyOne = driver.findElement(By.xpath("//span[@class='a-button-text a-declarative']")).getText().split(":");
 
-		// Assert quantity updated as 1
-		 Assert.assertEquals(splitQty[1] , "1");
+		Assert.assertEquals(productQntyOne[1], "1");
+		System.out.println("Assert successful, hat quantity updated :" +productQntyOne[1]);
+	
 
-		// Assert total price is updated for 1 item
-		Assert.assertEquals(totalPrice, singleHatPrice);
+	//Verify total price is updated correctly for one hat
+		
+
+		String singleHat=driver.findElement(By.xpath("//span[@class='a-size-medium a-color-base sc-price sc-white-space-nowrap sc-product-price a-text-bold']")).getText();
+		System.out.println(singleHat);
+		String totalPriceUpdated =driver.findElement(By.id("sc-subtotal-amount-activecart")).getText();
+		System.out.println(totalPriceUpdated);
+	    Assert.assertEquals(totalPriceUpdated, singleHat);
+
+	    
+
+
+		
 
 	}
 
 }
+ 
