@@ -1,0 +1,23 @@
+Setup Document
+
+1. Download the Jar files of Cucumber and Selenium and TestNG from Maven dependencies
+Cucumber-java
+Cucumber-testng
+selenium-java
+testng
+2. Add Cucumber Plugin from Eclipse Marketplace.
+Cucumber eclipse plugin
+Natural 0.9
+
+3. Import project into eclipse
+5. Close all the open browser instances
+4. Run runner file
+5. Check hmtl report in target folder
+
+RUN FROM MAVEN COMMAND LINE
+
+1.Add maven-surefire-plugin wsing testNG xml to your pom.xml
+  And maven-compiler-plugin
+2.Open the command prompt and change the directory to the project location where pom.xml is present.
+3.Command to go to your project- cd C:\Users\Vibha\eclipse-workspace-test\demo
+4.command to run maven project -mvn test
