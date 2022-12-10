@@ -18,14 +18,22 @@ Setup Document
 4. Run runner file/ Or Run feature file
 5. Check the hmtl report in target folder
 
-OR RUN PROJECT FROM TESTNG XML
+** RUN PROJECT FROM TESTNG XML
 	Right click on the project and choose 'convert to TestNG'.
 	Open generated testNG file
 	Right click-run as TestNG 
 
-OR RUN FROM MAVEN COMMAND LINE
+** RUN FROM MAVEN COMMAND LINE
 	Add 'maven-surefire-plugin using testNG xml' to your pom.xml
    	And maven-compiler-plugin
 	Open the command prompt and change the directory to the project location where pom.xml is present.
 	Command to go to your project- cd <<project location>>
 	command to run maven project -mvn test
+
+** RUN ON JENKINS
+	Download jenkins.war file
+	On cmd set the directory path where your jenkins war file is located
+	Run - java -jar jenkins.war
+	open http port localhost:8080
+	setup maven job
+	build the job
