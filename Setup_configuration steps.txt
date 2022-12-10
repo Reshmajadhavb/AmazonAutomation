@@ -34,6 +34,6 @@ Setup Document
 	Download jenkins.war file
 	On cmd set the directory path where your jenkins war file is located
 	Run - java -jar jenkins.war
-	open http port localhost:8080
-	setup maven job
-	build the job
+	Open http port localhost:8080
+	Create maven job and configure the build
+	build the job and check the console output
