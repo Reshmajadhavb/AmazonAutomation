@@ -1,0 +1,51 @@
+ //case1
+    if (dropdown1.isDisplayed()) {
+Try{
+	  dropdown1.click(); 
+	  selectQnty1.click(); } 
+}catch(NoSuchElementException e){
+System.out.println("quantinty dropdown option not visible");
+}
+	//case2 
+	 else if(select_size.isDisplayed()) { 
+Try{
+	select_size.click();
+	size_small.click(); 
+	buying_options.click(); 
+	dropdown2.click(); 
+	selectQnty2.click(); 
+	addToCartButton1.click();
+	close_window.click();
+ }catch(NoSuchElementException e){
+System.out.println("select size option not visible");
+}
+	 //case3 
+	 else if(buying_options.isDisplayed){
+Try{
+	buying_options.click(); 
+	dropdown2.click(); 
+	selectQnty2.click();
+	addToCartButton1.click();
+    close_window.click();
+}catch (NoSuchElementException e){
+System.out.println("see buying options not visible");
+
+	//case4
+    else if(addToCartButton1.isEnabled()){
+Try{
+    
+    addToCartButton1.click();
+	System.out.println("only one product quantinty is available");
+ }catch(NoSuchElementException e){
+System.out.println("add to cart not yet visible");
+}
+    else{
+	System.out.println("exceptional case not caught");
+	}
+}
+
+
+
+
+
+
